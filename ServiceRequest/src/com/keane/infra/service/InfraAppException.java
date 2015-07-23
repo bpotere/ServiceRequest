@@ -1,5 +1,6 @@
 package com.keane.infra.service;
 
+@SuppressWarnings("serial")
 public class InfraAppException extends Exception{
 
 	public InfraAppException() {

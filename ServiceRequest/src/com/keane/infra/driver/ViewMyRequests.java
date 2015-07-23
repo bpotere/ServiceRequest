@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import com.keane.infra.domain.RequestDetails;
 import com.keane.infra.dao.InfraDAOException;
@@ -47,11 +48,18 @@ public class ViewMyRequests extends JInternalFrame {
 		getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		
+		DefaultTableModel model = new DefaultTableModel(data, columnNames);
 		
-		table = new JTable(data, columnNames);
+		table = new JTable(model);
 		scrollPane.setViewportView(table);
 		
-		
+		RequestDAO rDAO = new RequestDAO();
+		try {
+			List<RequestDetails> requestsList = rDAO.getRequestByCreator(userID);
+		} catch (InfraDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
